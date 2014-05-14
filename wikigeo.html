@@ -1,0 +1,52 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="wikigeo.js"></script>
+<script src="http://knockoutjs.com/downloads/knockout-3.1.0.js"></script>
+
+
+<script type="text/javascript">
+var lat_param = gup('lat');
+var lon_param = gup('lon');
+var limit_param = gup('limit'); 
+var radius_param = gup('radius');
+var categories_param = gup('categories');
+var summaries_param = gup('summaries');
+var templates_param = gup('templates');
+var images_param = gup('images');
+
+var result = "null";
+
+  
+function init() { 
+console.log(lat_param)
+console.log(lon_param)
+geojson([lon_param, lat_param], {radius: radius_param, limit: limit_param,language:"it"}, function(data) {
+    console.log(data);
+    console.log(ko.toJSON(data));
+    document.body.innerHTML = ko.toJSON(data)
+});
+}
+
+function gup(name)
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return results[1];
+}
+
+</script>
+
+</head>
+
+<body style="margin:0" onload="init();">
+</body>
+</html>

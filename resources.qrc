@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/qgisWebConnector" >
+        <file>icoWebConnector.png</file>
+    </qresource>
+</RCC>
