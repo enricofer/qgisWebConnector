@@ -57,7 +57,7 @@ class qWebConnector(QgsMapTool):
         QObject.connect(self.webServicesAction, SIGNAL("triggered()"), self.webServicesRun)
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.webServicesAction)
-        self.iface.addPluginToMenu("&Qgis Web Connector", self.webServicesAction)
+        self.iface.addPluginToWebMenu("&Qgis Web Connector", self.webServicesAction)
         self.path = os.path.dirname( os.path.abspath( __file__ ) )
         #self.view = uic.loadUi( os.path.join( self.path, "qwebconnector.ui" ) )
         self.view = qWebConnectorDialog()
