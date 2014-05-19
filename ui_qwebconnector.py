@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
+# Form implementation generated from reading ui file 'qwebconnector.ui'
 #
-# Created: Mon Apr 28 11:12:08 2014
+# Created: Mon May 19 08:33:04 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,7 +32,7 @@ class Ui_webConnectorDialog(object):
         self.Webview.setUrl(QtCore.QUrl(_fromUtf8("about:blank")))
         self.Webview.setObjectName(_fromUtf8("Webview"))
         self.openInBrowser = QtGui.QPushButton(webservicesDialog)
-        self.openInBrowser.setGeometry(QtCore.QRect(509, 2, 90, 25))
+        self.openInBrowser.setGeometry(QtCore.QRect(489, 2, 110, 25))
         self.openInBrowser.setObjectName(_fromUtf8("openInBrowser"))
         self.zoomPlus = QtGui.QPushButton(webservicesDialog)
         self.zoomPlus.setGeometry(QtCore.QRect(556, 360, 20, 20))
@@ -42,10 +43,10 @@ class Ui_webConnectorDialog(object):
         self.zoomPlus.setFont(font)
         self.zoomPlus.setObjectName(_fromUtf8("zoomPlus"))
         self.comboBox = QtGui.QComboBox(webservicesDialog)
-        self.comboBox.setGeometry(QtCore.QRect(2, 2, 120, 25))
+        self.comboBox.setGeometry(QtCore.QRect(2, 2, 130, 25))
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
         self.urlLine = QtGui.QLineEdit(webservicesDialog)
-        self.urlLine.setGeometry(QtCore.QRect(122, 2, 298, 25))
+        self.urlLine.setGeometry(QtCore.QRect(132, 2, 249, 25))
         self.urlLine.setObjectName(_fromUtf8("urlLine"))
         self.zoomMinus = QtGui.QPushButton(webservicesDialog)
         self.zoomMinus.setGeometry(QtCore.QRect(575, 360, 20, 20))
@@ -56,7 +57,7 @@ class Ui_webConnectorDialog(object):
         self.zoomMinus.setFont(font)
         self.zoomMinus.setObjectName(_fromUtf8("zoomMinus"))
         self.openGeoJSON = QtGui.QPushButton(webservicesDialog)
-        self.openGeoJSON.setGeometry(QtCore.QRect(420, 2, 90, 25))
+        self.openGeoJSON.setGeometry(QtCore.QRect(380, 2, 110, 25))
         self.openGeoJSON.setObjectName(_fromUtf8("openGeoJSON"))
 
         self.retranslateUi(webservicesDialog)
