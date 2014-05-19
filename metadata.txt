@@ -12,7 +12,7 @@
 name=Qgis Web Connector
 qgisMinimumVersion=2.0
 description=The plugin is intended to act as web connector for Qgis. It allows to access http geo web services right from qgis binding to urls custom variables related to user input and map view. Tutorial on  website.
-version=1.00
+version=1.10
 author=Enrico Ferreguti
 email=enricofer@gmail.com
 
@@ -21,7 +21,7 @@ email=enricofer@gmail.com
 # Optional items:
 
 # Uncomment the following line and add your changelog entries:
-changelog = release
+changelog = dialog reformatted for macos and linux desktop, correct behaviour of url line, now update webview on return
 
 # tags are comma separated with spaces allowed
 tags = webservice, web, services, geowebservices, web, connector

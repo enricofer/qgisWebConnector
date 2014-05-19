@@ -1,0 +1,6 @@
+v1.0
+Emission
+
+v1.1
+dialog reformatted for macos and linux desktop, 
+correct behaviour of url line, now updates webview on return
