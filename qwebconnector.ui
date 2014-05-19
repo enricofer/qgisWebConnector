@@ -31,9 +31,9 @@
   <widget class="QPushButton" name="openInBrowser">
    <property name="geometry">
     <rect>
-     <x>509</x>
+     <x>489</x>
      <y>2</y>
-     <width>90</width>
+     <width>110</width>
      <height>25</height>
     </rect>
    </property>
@@ -69,7 +69,7 @@
     <rect>
      <x>2</x>
      <y>2</y>
-     <width>120</width>
+     <width>130</width>
      <height>25</height>
     </rect>
    </property>
@@ -77,9 +77,9 @@
   <widget class="QLineEdit" name="urlLine">
    <property name="geometry">
     <rect>
-     <x>122</x>
+     <x>132</x>
      <y>2</y>
-     <width>298</width>
+     <width>249</width>
      <height>25</height>
     </rect>
    </property>
@@ -110,9 +110,9 @@
   <widget class="QPushButton" name="openGeoJSON">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>380</x>
      <y>2</y>
-     <width>90</width>
+     <width>110</width>
      <height>25</height>
     </rect>
    </property>

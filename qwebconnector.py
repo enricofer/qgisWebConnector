@@ -59,15 +59,15 @@ class qWebConnector(QgsMapTool):
         self.iface.addToolBarIcon(self.webServicesAction)
         self.iface.addPluginToMenu("&Qgis Web Connector", self.webServicesAction)
         self.path = os.path.dirname( os.path.abspath( __file__ ) )
-        #self.view = uic.loadUi( os.path.join( self.path, "qwebconnector.ui" ) )
-        self.view = qWebConnectorDialog()
+        self.view = uic.loadUi( os.path.join( self.path, "qwebconnector.ui" ) )
+        #self.view = qWebConnectorDialog()
         self.view.zoomPlus.clicked.connect(self.zoomPlus)
         self.view.zoomMinus.clicked.connect(self.zoomMinus)
         self.view.openInBrowser.clicked.connect(self.openInBrowser)
         self.view.openGeoJSON.clicked.connect(self.openGeoJSON)
         self.view.comboBox.activated.connect(self.changeWebService)
         self.view.comboBox.setMaxVisibleItems(20)
-        self.view.urlLine.textChanged.connect(self.updateWebView)
+        self.view.urlLine.returnPressed.connect(self.updateWebView)
         #self.view.urlLine.clicked.connect(self.highlightUrlLine) non funziona, bisogna reimplementare l'evento
         self.loadWebservicesFromFile()
         self.pressed=None
@@ -248,7 +248,8 @@ class qWebConnector(QgsMapTool):
             self.addWebService()
         else:
             self.view.urlLine.setText(self.parseUrl(self.webservicesList[self.view.comboBox.itemText(line)]))
-        
+            self.updateWebView()
+            
     def addWebService(self):
         #called by clicking "edit webservices" on qcombobox
         self.editWS.show()
@@ -386,6 +387,7 @@ class qWebConnector(QgsMapTool):
         self.view.Webview.hide()
         if (self.view.comboBox.currentText() != "Select a Webservice")and(self.view.comboBox.currentText() != "Edit Webservices"):
             self.view.urlLine.setText(self.parseUrl(self.webservicesList[self.view.comboBox.currentText()]))
+            self.updateWebView()
         #self.view.Webview.load(QUrl(self.WSUrl))
         self.view.Webview.show()
 
@@ -402,6 +404,6 @@ class qWebConnector(QgsMapTool):
 
     def webServicesRun(self):
         # called by click on toolbar icon
-        gsvMessage="Pick a point to call Geo Webservice in browser window"
+        gsvMessage="Pick a point and select a geo web service to open in browser window"
         iface.mainWindow().statusBar().showMessage(gsvMessage)
         self.canvas.setMapTool(self)
