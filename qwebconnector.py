@@ -107,7 +107,7 @@ class qWebConnector(QgsMapTool):
         proxyPort = s.value("proxy/proxyPort", "" )
         proxyUser = s.value("proxy/proxyUser", "" )
         proxyPassword = s.value("proxy/proxyPassword", "" )
-        print proxyEnabled+"; "+proxyType+"; "+proxyHost+"; " + proxyPort+"; " + proxyUser+"; " +"*********; "
+        print str(proxyEnabled)+"; "+str(proxyType)+"; "+str(proxyHost)+"; " + str(proxyPort)+"; " + str(proxyUser)+"; " +"*********; "
         
         if proxyEnabled == "true": # test if there are proxy settings
            proxy = QNetworkProxy()
@@ -316,6 +316,11 @@ class qWebConnector(QgsMapTool):
 
     def canvasReleaseEvent(self, event):
         # Release event handler inherited from QgsMapTool needed to calculate heading
+        event.modifiers()
+        if (event.modifiers() & Qt.ControlModifier):
+            self.CTRLPressed = True
+        else:
+            self.CTRLPressed = None
         self.pressed=None
         self.highlight.reset()
         self.box.reset()
@@ -338,7 +343,10 @@ class qWebConnector(QgsMapTool):
                 heading =  180 - result
             else:
                 heading = 360 - (180 + result)      
-        self.openSVDialog(heading)
+        if self.CTRLPressed and self.view.urlLine.text()!="":
+            self.openInBrowser()
+        else:
+            self.openSVDialog(heading)
         
     def openSVDialog(self,heading):
         # procedure for compiling streetview and bing url with the given location and heading
@@ -380,16 +388,20 @@ class qWebConnector(QgsMapTool):
             if self.iface.mapCanvas().scale()>value:
                 self.param['GMAPSZOOMFACTOR']=str(key)
                 break
-        self.view.setWindowTitle("Qgis Web Connector")
-        self.view.show()
-        self.view.raise_()
-        self.view.activateWindow()
-        self.view.Webview.hide()
-        if (self.view.comboBox.currentText() != "Select a Webservice")and(self.view.comboBox.currentText() != "Edit Webservices"):
+        if self.CTRLPressed and self.view.urlLine.text()!="":
             self.view.urlLine.setText(self.parseUrl(self.webservicesList[self.view.comboBox.currentText()]))
-            self.updateWebView()
-        #self.view.Webview.load(QUrl(self.WSUrl))
-        self.view.Webview.show()
+            self.openInBrowser()
+        else:
+            self.view.setWindowTitle("Qgis Web Connector")
+            self.view.show()
+            self.view.raise_()
+            self.view.activateWindow()
+            self.view.Webview.hide()
+            if (self.view.comboBox.currentText() != "Select a Webservice")and(self.view.comboBox.currentText() != "Edit Webservices"):
+                self.view.urlLine.setText(self.parseUrl(self.webservicesList[self.view.comboBox.currentText()]))
+                self.updateWebView()
+            #self.view.Webview.load(QUrl(self.WSUrl))
+            self.view.Webview.show()
 
     def updateWebView(self):
         self.view.Webview.setZoomFactor(0.7)
