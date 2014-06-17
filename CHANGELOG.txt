@@ -4,3 +4,8 @@ Emission
 v1.1
 dialog reformatted for macos and linux desktop, 
 correct behaviour of url line, now updates webview on return
+
+v1.2
+CTRL + click to open web map straight to browser
+webservice dialog resizable
+more predefined webservices

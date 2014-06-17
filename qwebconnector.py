@@ -68,6 +68,7 @@ class qWebConnector(QgsMapTool):
         self.view.comboBox.activated.connect(self.changeWebService)
         self.view.comboBox.setMaxVisibleItems(20)
         self.view.urlLine.returnPressed.connect(self.updateWebView)
+        self.view.resized.connect(self.resizeDialog)
         #self.view.urlLine.clicked.connect(self.highlightUrlLine) non funziona, bisogna reimplementare l'evento
         self.loadWebservicesFromFile()
         self.pressed=None
@@ -126,6 +127,18 @@ class qWebConnector(QgsMapTool):
            proxy.setUser(proxyUser)
            proxy.setPassword(proxyPassword)
            QNetworkProxy.setApplicationProxy(proxy)
+
+    def resizeDialog(self):
+        self.viewHeight=self.view.size().height()
+        self.viewWidth=self.view.size().width()
+        if self.viewHeight > 200 and self.viewWidth > 350:
+            self.view.Webview.resize(self.viewWidth,self.viewHeight)
+            self.view.Webview.load(QUrl(self.view.urlLine.text()))
+            self.view.openGeoJSON.move(self.viewWidth-220,self.view.openGeoJSON.y())
+            self.view.openInBrowser.move(self.viewWidth-111,self.view.openInBrowser.y())
+            self.view.zoomPlus.move(self.viewWidth-44,self.viewHeight-25)
+            self.view.zoomMinus.move(self.viewWidth-25,self.viewHeight-25)
+            self.view.urlLine.setFixedWidth(self.viewWidth-351)
 
     def initEditWS(self):
         # Method to setup Settings editor window
@@ -293,8 +306,8 @@ class qWebConnector(QgsMapTool):
         self.param['PREVLAT'] = self.param['LAT']
         self.param['LON'] = str(self.pointWgs84.x())
         self.param['LAT'] = str(self.pointWgs84.y())
-        self.param['X'] = str(self.pressx)
-        self.param['Y'] = str(self.pressy)
+        self.param['X'] = str(self.pressedPoint.x())
+        self.param['Y'] = str(self.pressedPoint.y())
 
     def canvasMoveEvent(self, event):
         # Moved event handler inherited from QgsMapTool needed to highlight the direction that is giving by the user
@@ -343,10 +356,10 @@ class qWebConnector(QgsMapTool):
                 heading =  180 - result
             else:
                 heading = 360 - (180 + result)      
-        if self.CTRLPressed and self.view.urlLine.text()!="":
-            self.openInBrowser()
-        else:
-            self.openSVDialog(heading)
+        #if self.CTRLPressed and self.view.urlLine.text()!="":
+        #    self.openInBrowser()
+        #else:
+        self.openSVDialog(heading)
         
     def openSVDialog(self,heading):
         # procedure for compiling streetview and bing url with the given location and heading

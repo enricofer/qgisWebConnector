@@ -25,11 +25,20 @@ from EditWebServices import Ui_EditWSDialog
 
 # create the view dialog
 class qWebConnectorDialog(QtGui.QDialog, Ui_webConnectorDialog):
+
+
+    resized_ev = QtCore.pyqtSignal(int, name='resized')
+
     def __init__(self):
         QtGui.QDialog.__init__(self)
         # Set up the user interface from Designer.
         #self.ui = Ui_Dialog()
         self.setupUi(self)
+      
+    def resizeEvent (self, event):
+        #print "resized"
+        self.resized_ev.emit(1)
+
 # create the settings dialog
 class webservicesSettingDialog(QtGui.QDialog, Ui_EditWSDialog):
     def __init__(self):
